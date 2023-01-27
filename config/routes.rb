@@ -20,9 +20,15 @@ Rails.application.routes.draw do
   end
 
 
-  # My Code Below
+  # Authentication routes code below:
 
-  # Does it make sense to have a second namespace here? Can I re-use the admin one?
+    # These routes will be for signup. The first renders a form in the browse, the second will 
+    # receive the form and create a user in our database using the data given to us by the user.
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+
+
+
 
 
 
