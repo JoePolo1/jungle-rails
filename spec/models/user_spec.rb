@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  private
+
   describe 'Validations' do
 
     it "should have an email, first name, last name, password and password confirmation" do
@@ -84,7 +86,6 @@ RSpec.describe User, type: :model do
     end
   
 
-
     it "should have a unique email that does not yet exist on user creation, regardless of case sensitivity" do
 
       @fake_user_one = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "chosenguy@place.com", password: "password", password_confirmation: "password")
@@ -101,14 +102,19 @@ RSpec.describe User, type: :model do
     end
 
 
-    # it "should not matter if an email is provided as upper case or lower case" do
-
-    # end
 
 
-    # it "should not matter if an email has whitespace preceding or following" do
+    it "should trim whitespace entered if an email has spaces preceding or following" do
 
-    # end
+      @fake_user = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "  chosenguy@place.com  ", password: "password", password_confirmation: "password")
+      @fake_user.save
+
+      # logs the error to console if there is one
+      puts @fake_user.errors.full_messages
+
+      expect(@fake_user.email).to eq("chosenguy@place.com")
+
+    end
 
   end
 

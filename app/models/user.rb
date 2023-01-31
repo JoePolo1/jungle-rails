@@ -7,4 +7,16 @@ class User < ApplicationRecord
   validates :password, presence: true, confirmation: true
   validates :password_confirmation, presence: true
 
+  before_save :trim_whitespace
+
+  private
+
+  def trim_whitespace
+    self.first_name = self.first_name.strip unless self.first_name.nil?
+    self.last_name = self.last_name.strip unless self.last_name.nil?
+    self.email = self.email.strip unless self.email.nil?
+  end
+
+  
+
 end
