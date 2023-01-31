@@ -4,11 +4,12 @@
 
 <%= bootstrap_form_for :user, url: '/users' do |f| %>
 
+
   <%= f.text_field :first_name %>
   <%= f.text_field :last_name %>
   <%= f.text_field :email %>
   <%= f.password_field :password %>
   <%= f.password_field :password_confirmation %>
-  <%= f.submit "Submit" %>
+  <%= f.submit "Submit", class: 'btn btn-primary' %>
 
 <% end %>
