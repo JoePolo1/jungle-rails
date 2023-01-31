@@ -19,6 +19,7 @@ RSpec.describe User, type: :model do
       # logs the error to console if there is one
       puts @fake_user.errors.full_messages
       expect(@fake_user.first_name).to be_nil
+      expect(@fake_user.errors.full_messages).to include "First name can't be blank"
 
     end
 
