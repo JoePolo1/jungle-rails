@@ -116,6 +116,19 @@ RSpec.describe User, type: :model do
 
     end
 
+
+    it "should produce an error message if the password is less than 8 characters" do
+
+      @fake_user = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "chosenguy@place.com", password: "passwor", password_confirmation: "passwor")
+      @fake_user.save
+
+      # logs the error to console if there is one
+      puts @fake_user.errors.full_messages
+
+      expect(@fake_user.errors.full_messages).to include "Password is too short (minimum is 8 characters)"
+
+    end
+
   end
 
 end
