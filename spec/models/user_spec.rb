@@ -73,13 +73,13 @@ RSpec.describe User, type: :model do
 
     it "should have a matching password and password_confirmation, and return an error if password/confirmation do not match" do
 
-      @fake_user = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "chosenguy@place.com", password: "password", password_confirmation: "password")
+      @fake_user = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "chosenguy@place.com", password: "password", password_confirmation: "asdsflkj")
       @fake_user.save
 
       # logs the error to console if there is one
       puts @fake_user.errors.full_messages
-      expect(@fake_user.password_confirmation).to be_nil
-      # expect(@fake_user.errors.full_messages).to include "Password confirmation can't be blank"
+
+      expect(@fake_user.errors.full_messages).to include "Password confirmation doesn't match Password"
 
     end
 
