@@ -102,8 +102,6 @@ RSpec.describe User, type: :model do
     end
 
 
-
-
     it "should trim whitespace entered if an email has spaces preceding or following" do
 
       @fake_user = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "  chosenguy@place.com  ", password: "password", password_confirmation: "password")
@@ -126,6 +124,32 @@ RSpec.describe User, type: :model do
       puts @fake_user.errors.full_messages
 
       expect(@fake_user.errors.full_messages).to include "Password is too short (minimum is 8 characters)"
+
+    end
+
+  end
+
+  describe '.authenticate_with_credentials' do
+
+    it "should return a user state if the password and email are correct" do
+
+      @fake_user = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "chosenguy@place.com", password: "password", password_confirmation: "password")
+      @fake_user.save
+
+      @fake_user_instance = User.authenticate_with_credentials("chosenguy@place.com", "password")
+
+      expect(@fake_user_instance).to_not be_nil
+
+    end
+
+    it "should return nil if the password and email are incorrect" do
+
+      @fake_user = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "chosenguy@place.com", password: "password", password_confirmation: "password")
+      @fake_user.save
+
+      @fake_user_instance = User.authenticate_with_credentials("chosenguy@place.com", "pasdfasdfassword")
+
+      expect(@fake_user_instance).to be false
 
     end
 
