@@ -25,7 +25,7 @@ RSpec.describe Product, type: :model do
       expect(@fake_product.name).to be_nil
 
       # logs the error to console if there is one
-      puts @fake_product.errors.full_messages
+      # puts @fake_product.errors.full_messages
 
       # checks that the error matches if name is provided as nil
       expect(@fake_product.errors.full_messages).to include "Name can't be blank"
@@ -41,7 +41,7 @@ RSpec.describe Product, type: :model do
       @fake_product.save
 
       # logs the error to console if there is one
-      puts @fake_product.errors.full_messages
+      # puts @fake_product.errors.full_messages
 
       expect(@fake_product.price).to be_nil
       expect(@fake_product.errors.full_messages).to include "Price can't be blank"
@@ -57,7 +57,7 @@ RSpec.describe Product, type: :model do
       @fake_product.save
 
       # logs the error to console if there is one
-      puts @fake_product.errors.full_messages
+      # puts @fake_product.errors.full_messages
 
       expect(@fake_product.quantity).to be_nil
       expect(@fake_product.errors.full_messages).to include "Quantity can't be blank"
@@ -74,7 +74,7 @@ RSpec.describe Product, type: :model do
       @fake_product.save
 
       # logs the error to console if there is one
-      puts @fake_product.errors.full_messages
+      # puts @fake_product.errors.full_messages
 
       expect(@fake_product.category).to be_nil
       expect(@fake_product.errors.full_messages).to include "Category can't be blank"
