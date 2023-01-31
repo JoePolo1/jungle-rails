@@ -82,18 +82,23 @@ RSpec.describe User, type: :model do
       expect(@fake_user.errors.full_messages).to include "Password confirmation doesn't match Password"
 
     end
-
-    
-
-
-    # it "should have a matching password and password confirmation" do
-
-    # end
+  
 
 
-    # it "should have a unique email that does not yet exist on user creation" do
+    it "should have a unique email that does not yet exist on user creation, regardless of case sensitivity" do
 
-    # end
+      @fake_user_one = User.new(first_name: "Aragorn", last_name: "Sonofarathorn", email: "chosenguy@place.com", password: "password", password_confirmation: "password")
+      @fake_user_one.save
+
+      @fake_user_two = User.new(first_name: "Boromir", last_name: "Ofgondor", email: "CHOSENGUY@place.com", password: "caretaker", password_confirmation: "caretaker")
+      @fake_user_two.save
+
+      # logs the error to console if there is one
+      puts @fake_user_two.errors.full_messages
+
+      expect(@fake_user_two.errors.full_messages).to include "Email has already been taken"
+
+    end
 
 
     # it "should not matter if an email is provided as upper case or lower case" do
